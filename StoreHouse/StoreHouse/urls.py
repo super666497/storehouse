@@ -23,4 +23,9 @@ urlpatterns = [
     path('manage/', views.manage),
     path('login/', views.login),
     path('query/', views.query),
+    path('in_cargo/<str:cargo_name>/', views.in_cargo),
+    path('out_cargo/<str:cargo_name>/', views.out_cargo),
+    path('in_new_cargo/', views.in_new_cargo),
+    path('check_in/', views.check_in),
+    path('check_out/', views.check_out),
 ]

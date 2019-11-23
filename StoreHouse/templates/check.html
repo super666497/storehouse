@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">#}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>#}
+{#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>#}
+    {% load sass_tags %}
+    <link rel="stylesheet" href="{% sass_src 'css/main.sass' %}" type="text/css" />
+    <script src="/static/js/main.js"></script>
+</head>
+<body id="background">
+    <table border="1" width="400" align="center">
+        <tr>
+            <td>{{ record_type }}时间</td>
+            <td>货物名称</td>
+            <td>货物数量</td>
+            <td>计量单位</td>
+        </tr>
+        {% for record in records %}
+            <tr>
+            <td>{{ record.record_time }}</td>
+            <td>{{ record.cargo_name }}</td>
+            <td>{{ record.cargo_number }}</td>
+            <td>{{ record.cargo_unit }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

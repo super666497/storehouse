@@ -39,9 +39,9 @@
         </form>
     </div>
 
-    <p>{{ memssage_of_query }}</p>
-    <p>{{ number_of_unregiste }}</p>
-    <p>{{ number_of_registe }}</p>
+    <a href="/in_new_cargo">进新货</a>
+    <a href="/check_in">进货记录</a>
+    <a href="/check_out">出货记录</a>
 
     <div>
         <p>查询结果</p>
@@ -57,12 +57,11 @@
                 <td>{{ cargo.cargo_name }}</td>
                 <td>{{ cargo.cargo_number }}</td>
                 <td>{{ cargo.cargo_unit }}</td>
-                <td><button>进货</button></td>
-                <td><button>出货</button></td>
+                <td><a href="/in_cargo/{{ cargo.cargo_name }}">进货</a></td>
+                <td><a href="/out_cargo/{{ cargo.cargo_name }}">出货</a></td>
             </tr>
             {% endfor %}
         </table>
     </div>
-
 </body>
 </html>
