@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "head.html" %}
+
+<body id="background">
+    <div>
+        <form action="/query/" method="post">
+            {% csrf_token %}
+            <table border="1" width="400" align="center">
+                <tr>
+                    <td>货物名称</td>
+                    <td>货物数量</td>
+                    <td>计量单位</td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="cargo_name" onselect="">
+                            <option value=""></option>
+                            {% for cargo_name in all_cargo_names %}
+                                <option value="{{ cargo_name }}">{{ cargo_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" name="cargo_number" value="{{ cargo_number }}">
+                    </td>
+
+                    <td>
+                        <select name="cargo_unit">
+                            <option value=""></option>
+                            {% for unit in all_units %}
+                                <option value="{{ unit }}">{{ unit }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="查询"></input>
+        </form>
+    </div>
+
+    <p>{{ memssage_of_query }}</p>
+    <p>{{ number_of_unregiste }}</p>
+    <p>{{ number_of_registe }}</p>
+
+    <div>
+        <p>查询结果</p>
+        <table border="1" width="1200" align="center">
+            <tr>
+                <td>货物名称</td>
+                <td>货物数量</td>
+                <td>计量单位</td>
+            </tr>
+            <br>
+            {% for cargo in all_cargoes %}
+            <tr>
+                <td>{{ cargo.cargo_name }}</td>
+                <td>{{ cargo.cargo_number }}</td>
+                <td>{{ cargo.cargo_unit }}</td>
+                <td><button>进货</button></td>
+                <td><button>出货</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

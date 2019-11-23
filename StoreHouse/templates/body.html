@@ -1,0 +1,22 @@
+<body id="background">
+    <div id="login_form">
+        <div id="header">
+            <h1>管理员登录</h1>
+        </div>
+        <form action="/login/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>名称</label>
+                <input type="text" name="user_name" placeholder="名称">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">密码</label>
+                <input type="password" class="form-control" id = "inputPassword" name="user_password" placeholder="Password">
+            </div>
+            <input type="submit" class="btn btn-default" value="登录"></input>
+        </form>
+            {% if message != NULL %}
+                <p>{{ message }}</p>
+            {% endif %}
+    </div>
+</body>
