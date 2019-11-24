@@ -18,6 +18,7 @@ from django.urls import path
 from store_app import views
 
 urlpatterns = [
+    path('quit/',views.quit),
     path('admin/', admin.site.urls),
     path('', views.main),
     path('manage/', views.manage),
@@ -28,4 +29,6 @@ urlpatterns = [
     path('in_new_cargo/', views.in_new_cargo),
     path('check_in/', views.check_in),
     path('check_out/', views.check_out),
+    path('check/进货/', views.check_query_in),
+    path('check/出货/', views.check_query_out),
 ]

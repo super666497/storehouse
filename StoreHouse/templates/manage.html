@@ -3,6 +3,13 @@
 {% include "head.html" %}
 
 <body id="background">
+
+    <button onclick="backmanage()" style="  float: right" >退出登录</button>
+    <script>
+        function backmanage() {
+            window.location.href="/quit";
+        }
+    </script>
     <div>
         <form action="/query/" method="post">
             {% csrf_token %}

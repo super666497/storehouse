@@ -161,6 +161,64 @@ def get_all_output_record():
         records.append(record(item))
     return records
 
+def find_in_record(cargo_name, cargo_number, cargo_unit, record_time):
+    style_like = "like '%'"
+    style_equals = "= '{0}'"
+    if len(cargo_name) == 0:
+        cargo_name = style_like
+    else:
+        cargo_name = style_equals.format(cargo_name)
+    cargo_number = str(cargo_number)
+    if len(cargo_number) == 0:
+        cargo_number = style_like
+    else:
+        cargo_number = style_equals.format(cargo_number)
+    if len(cargo_unit) == 0:
+        cargo_unit = style_like
+    else:
+        cargo_unit = style_equals.format(cargo_unit)
+    if len(record_time) == 0:
+        record_time = style_like
+    else:
+        record_time = "like '%{0}%'".format(record_time)
+
+    sql = "select * from input_view where cargo_name {0} and cargo_number {1} and cargo_unit {2} and convert(varchar,cargo_input_time,20) {3} ".format(
+        cargo_name, cargo_number, cargo_unit, record_time)
+    items = query(sql)
+    all_records = []
+    for item in items:
+        all_records.append(record(item))
+    return all_records
+
+def find_out_record(cargo_name, cargo_number, cargo_unit, record_time):
+    print("hello find out")
+    style_like = "like '%'"
+    style_equals = "= '{0}'"
+    if len(cargo_name) == 0:
+        cargo_name = style_like
+    else:
+        cargo_name = style_equals.format(cargo_name)
+    cargo_number = str(cargo_number)
+    if len(cargo_number) == 0:
+        cargo_number = style_like
+    else:
+        cargo_number = style_equals.format(cargo_number)
+    if len(cargo_unit) == 0:
+        cargo_unit = style_like
+    else:
+        cargo_unit = style_equals.format(cargo_unit)
+    if len(record_time) == 0:
+        record_time = style_like
+    else:
+        record_time = "like '%{0}%'".format(record_time)
+
+    sql = "select * from output_view where cargo_name {0} and cargo_number {1} and cargo_unit {2} and convert(varchar,cargo_output_time,20) {3} ".format(
+        cargo_name, cargo_number, cargo_unit, record_time)
+    items = query(sql)
+    all_records = []
+    for item in items:
+        all_records.append(record(item))
+    return all_records
 
 if __name__ == '__main__':
     already_exist_cargo_name('苹果')

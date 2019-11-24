@@ -3,16 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    {#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">#}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>#}
-{#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     {% load sass_tags %}
     <link rel="stylesheet" href="{% sass_src 'css/main.sass' %}" type="text/css" />
     <script src="/static/js/main.js"></script>
     <link rel="shortcut icon" href="/static/icons/avatar.ico"/>
+    <script>
+        function backmanage() {
+            window.location.href="/manage";
+        }
+    </script>
 </head>
 <body id="background">
+
+    <button onclick="backmanage()" style=" height: 50px;width: 80px; float: right" >首页</button>
+
+    <div>
+        <form action="/check/{{ record_type }}/" method="post">
+            {% csrf_token %}
+            <table border="1" width="800" align="center">
+                <tr>
+                    <td>货物名称</td>
+                    <td>货物数量</td>
+                    <td>计量单位</td>
+                    <td>时间</td>
+                </tr>
+                <tr>
+                    <td>
+                    <input type="text" name="cargo_name" value="">
+                    </td>
+                    <td>
+                        <input type="number" name="cargo_number" value="{{ cargo_number }}">
+                    </td>
+
+                    <td>
+                    <input type="text" name="cargo_unit" value="">
+                    </td>
+
+                    <td>
+                        <input type="text" name="record_time" value="">
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="查询"></input>
+        </form>
+    </div>
+
+
     <table border="1" width="400" align="center">
         <tr>
             <td>{{ record_type }}时间</td>
