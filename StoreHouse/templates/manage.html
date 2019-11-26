@@ -4,12 +4,25 @@
 
 <body id="background">
 
+    <button onclick="registe()" style="float: left">注册</button>
+    <button onclick="delUser()" style="float: left">注销账号</button>
     <button onclick="backmanage()" style="  float: right" >退出登录</button>
     <script>
         function backmanage() {
             window.location.href="/quit";
         }
+        function registe() {
+            window.location.href="/toregiste";
+        }
+        function delUser() {
+            var r = confirm("亲，您确定注销该账号吗？")
+		if (r == true) {
+		window.location.href="/del_User";
+		} else {
+		}
+        }
     </script>
+    <span></span>
     <div>
         <form action="/query/" method="post">
             {% csrf_token %}

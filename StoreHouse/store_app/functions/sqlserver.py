@@ -191,7 +191,6 @@ def find_in_record(cargo_name, cargo_number, cargo_unit, record_time):
     return all_records
 
 def find_out_record(cargo_name, cargo_number, cargo_unit, record_time):
-    print("hello find out")
     style_like = "like '%'"
     style_equals = "= '{0}'"
     if len(cargo_name) == 0:
@@ -220,5 +219,21 @@ def find_out_record(cargo_name, cargo_number, cargo_unit, record_time):
         all_records.append(record(item))
     return all_records
 
+def check_user_name(user_name):
+    sql = "select * from [user] where user_name='{0}'".format(user_name)
+    items = query(sql)
+    if len(items) > 0:
+        return 0
+    else:
+        return 1
+
+def add_User_table(user_name,user_password):
+    sql = "exec create_new_user @user_name='{0}',@user_password='{1}'".format(user_name, user_password)
+    exec(sql)
+
+def delete_User_table(user_name):
+    sql = "exec delete_user @user_name='{0}'".format(user_name)
+    exec(sql)
+
 if __name__ == '__main__':
-    already_exist_cargo_name('苹果')
+    delete_User_table()

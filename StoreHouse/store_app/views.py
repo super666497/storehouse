@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .functions.sqlserver import check_login, get_query_context, \
     get_all_cargoes, find_cargo, in_cargo_exist_sql,in_cargo_new_sql,\
     out_cargo_sql, get_total_number_of_cargo, get_cargo_unit, already_exist_cargo_name,\
-    get_all_input_record, get_all_output_record, find_in_record, find_out_record
+    get_all_input_record, get_all_output_record, find_in_record, find_out_record,\
+    check_user_name, add_User_table, delete_User_table
 # Create your views here.
 
 def main(request):
@@ -23,8 +24,9 @@ def login(request):
         user_name = request.POST['user_name']
         user_password = request.POST['user_password']
         if check_login(user_name, user_password):
+            request.session['Name'] = user_name
             context = get_query_context()
-            cargo_context = {'all_cargoes': get_all_cargoes()}
+            cargo_context = {'all_cargoes': get_all_cargoes(), 'Name': user_name}
             context.update(cargo_context)
             return render(request, "manage.html", context)
     message_context = {'message': '用户名或密码错误!'}
@@ -128,3 +130,29 @@ def check_query_out(request):
     context = {'title': '出货记录', 'record_type': '出货', 'records': get_all_input_record()}
     context.update(context)
     return render(request, "check.html", context)
+
+def registe(request):
+    return render(request, "registe.html")
+
+def add_User(request):
+    if request.method == 'POST':
+        user_name = request.POST['user_name']
+        user_password = request.POST['user_password']
+        print("user_name"+user_name+"  user_password"+user_password)
+        if len(user_name) > 0:
+            if len(user_password) > 0:
+                if check_user_name(user_name):
+                    add_User_table(user_name, user_password)
+                    context = {'message': '添加成功'}
+                else:
+                    context = {'message': '该用户已存在'}
+            else:
+                context = {'message': '请输入密码'}
+        else:
+            context = {'message': '请输入用户名'}
+    return render(request, "registe.html", context)
+
+def delete_User(request):
+    user_name = request.session['Name']
+    delete_User_table(user_name)
+    return render(request, "main.html")

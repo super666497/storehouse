@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>注册</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -11,32 +11,30 @@
     <link rel="stylesheet" href="{% sass_src 'css/main.sass' %}" type="text/css" />
     <script src="/static/js/main.js"></script>
     <link rel="shortcut icon" href="/static/icons/avatar.ico"/>
-    <script>
+     <script>
         function backmanage() {
             window.location.href="/manage";
         }
     </script>
 </head>
-<body id="background">
-<div>
-    <button onclick="backmanage()" style="  float: right" >首页</button>
-</div>
-    <div id="in_out_from">
-
-        <form method="post">
+<body id="background" >
+             <div>
+                  <button onclick="backmanage()" style="  float: right" >首页</button>
+             </div>
+             <form action="/User_registe/" method="post">
             {% csrf_token %}
-            <table align="center">
-                <tr>
-                    <td><input name="cargo_name" value="{{ cargo_name }}"></input></td>
-                    <td><input type="number" name="cargo_number" value="0"></td>
-                    <td><input name="cargo_unit" value="{{ cargo_unit }}"></input></td>
-                    <td><input type="submit" value="{{ submit_type }}"></input></td>
-                </tr>
-            </table>
+            <div class="form-group">
+                <label>名称</label>
+                <input type="text" name="user_name" placeholder="名称">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">密码</label>
+                <input type="password"  name="user_password" placeholder="Password">
+            </div>
+            <input type="submit" class="btn btn-default" value="注册">
         </form>
-        {% if message != NULL %}
-            <p>{{ message }}</p>
-        {% endif %}
-    </div>
+            {% if message != NULL %}
+                <p>{{ message }}</p>
+            {% endif %}
 </body>
 </html>
