@@ -2,11 +2,15 @@ from django.shortcuts import render
 from .functions.sqlserver import check_login, get_query_context, \
     get_all_cargoes, find_cargo, in_cargo_exist_sql,in_cargo_new_sql,\
     out_cargo_sql, get_total_number_of_cargo, get_cargo_unit, already_exist_cargo_name,\
-    get_all_input_record, get_all_output_record
+    get_all_input_record, get_all_output_record, find_in_record, find_out_record
 # Create your views here.
 
 def main(request):
     return render(request, "main.html")
+
+def quit(request):
+    message_context = {'message': ''}
+    return render(request, "main.html", message_context)
 
 def manage(request):
     context = get_query_context()
@@ -97,4 +101,30 @@ def check_in(request):
 
 def check_out(request):
     context = {'title': '出货记录', 'record_type': '出货', 'records': get_all_output_record()}
+    return render(request, "check.html", context)
+
+def check_query_in(request):
+    if request.method == 'POST':
+        cargo_name = request.POST['cargo_name']
+        cargo_number = request.POST['cargo_number']
+        cargo_unit = request.POST['cargo_unit']
+        record_time = request.POST['record_time']
+        records = find_in_record(cargo_name, cargo_number, cargo_unit, record_time)
+        context = {'title': '进货记录', 'record_type': '进货', 'records': records}
+        return render(request, "check.html", context)
+    context = {'title': '进货记录', 'record_type': '进货', 'records': get_all_input_record()}
+    context.update(context)
+    return render(request, "check.html", context)
+
+def check_query_out(request):
+    if request.method == 'POST':
+        cargo_name = request.POST['cargo_name']
+        cargo_number = request.POST['cargo_number']
+        cargo_unit = request.POST['cargo_unit']
+        record_time = request.POST['record_time']
+        records = find_out_record(cargo_name, cargo_number, cargo_unit, record_time)
+        context = {'title': '出货记录', 'record_type': '出货', 'records': records}
+        return render(request, "check.html", context)
+    context = {'title': '出货记录', 'record_type': '出货', 'records': get_all_input_record()}
+    context.update(context)
     return render(request, "check.html", context)
