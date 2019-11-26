@@ -29,8 +29,9 @@ def login(request):
             cargo_context = {'all_cargoes': get_all_cargoes(), 'Name': user_name}
             context.update(cargo_context)
             return render(request, "manage.html", context)
-    message_context = {'message': '用户名或密码错误!'}
-    return render(request, "main.html", message_context)
+        message_context = {'message': '用户名或密码错误!'}
+        return render(request, "main.html", message_context)
+    return render(request, "main.html")
 
 def query(request):
     if request.method == 'POST':
@@ -132,13 +133,9 @@ def check_query_out(request):
     return render(request, "check.html", context)
 
 def registe(request):
-    return render(request, "registe.html")
-
-def add_User(request):
     if request.method == 'POST':
         user_name = request.POST['user_name']
         user_password = request.POST['user_password']
-        print("user_name"+user_name+"  user_password"+user_password)
         if len(user_name) > 0:
             if len(user_password) > 0:
                 if check_user_name(user_name):
@@ -150,7 +147,8 @@ def add_User(request):
                 context = {'message': '请输入密码'}
         else:
             context = {'message': '请输入用户名'}
-    return render(request, "registe.html", context)
+        return render(request, "registe.html", context)
+    return render(request, "registe.html")
 
 def delete_User(request):
     user_name = request.session['Name']

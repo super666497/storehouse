@@ -31,7 +31,6 @@ urlpatterns = [
     path('check_out/', views.check_out),
     path('check/进货/', views.check_query_in),
     path('check/出货/', views.check_query_out),
-    path('toregiste/', views.registe),
-    path('User_registe/', views.add_User),
+    path('registe/', views.registe),
     path('del_User/', views.delete_User)
 ]
